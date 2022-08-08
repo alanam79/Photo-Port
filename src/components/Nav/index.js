@@ -21,7 +21,7 @@ function Nav() {
 
   // if we want to console.log the category name
   function categorySelected(name) {
-    console.log(`${name} clicked`);
+    console.log(`${name} clicked.`);
   }
 
   return (
@@ -38,7 +38,7 @@ function Nav() {
       <nav>
         <ul className="flex-row">
           <li className="mx-2">
-            <a href="#about">About me</a>
+            <a href="#about">About Me</a>
           </li>
           <li>
             <span>Contact</span>
