@@ -8,6 +8,7 @@ function ContactForm() {
     email: "",
     message: "",
   });
+
   // destructuring formState
   const { name, email, message } = formState;
 
