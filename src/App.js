@@ -21,18 +21,29 @@ function App() {
 
   const [currentCategory, setCurrentCategory] = useState(categories[0]);
 
+// sets so the contact form only shows when clicked
+  const [contactSelected, setContactSelected] = useState(false);
+
   return (
     <div>
+      {/* Passing the getter and setter functions into the Nav component will allow this component to modify the state in the App component, which will conditionally render based on the user's selection. */}
       <Nav
         categories={categories}
         setCurrentCategory={setCurrentCategory}
         currentCategory={currentCategory}
+        contactSelected={contactSelected}
+        setContactSelected={setContactSelected}
       ></Nav>
       <main>
-        <ContactForm></ContactForm>
-        {/* pass the current category, which is the category selected by the user, from the Gallery component in App.js,  */}
-        <Gallery currentCategory={currentCategory}></Gallery>
-        <About></About>
+        {/* identified with the ? and : symbols. The ternary operator is a popular pattern in React to enable conditional rendering */}
+        {!contactSelected ? (
+          <>
+            <Gallery currentCategory={currentCategory}></Gallery>
+            <About></About>
+          </>
+        ) : (
+          <ContactForm></ContactForm>
+        )}
       </main>
     </div>
   );

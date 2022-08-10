@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { validateEmail } from "../../utils/helpers";
 
 function ContactForm() {
   // the hook that'll manage the form data
@@ -9,20 +10,35 @@ function ContactForm() {
     message: "",
   });
 
+  const [errorMessage, setErrorMessage] = useState("");
   // destructuring formState
   const { name, email, message } = formState;
 
-  function handleChange(e) {
-    // below only targets the name input
-    // setFormState({...formState, name: e.target.value })
-    setFormState({ ...formState, [e.target.name]: e.target.value });
-  }
-  // console.log(formState);
-
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formState);
-  }
+    if (!errorMessage) {
+      setFormState({ [e.target.name]: e.target.value });
+      console.log("Form", formState);
+    }
+  };
+
+  const handleChange = (e) => {
+    if (e.target.name === "email") {
+      const isValid = validateEmail(e.target.value);
+      if (!isValid) {
+        setErrorMessage("Your email is invalid.");
+      } else {
+        setErrorMessage("");
+      }
+    } else {
+      if (!e.target.value.length) {
+        setErrorMessage(`${e.target.name} is required.`);
+      } else {
+        setErrorMessage("");
+      }
+    }
+    console.log("errorMessage", errorMessage);
+  };
 
   // JSX
   return (
@@ -37,7 +53,8 @@ function ContactForm() {
           <input
             type="text"
             defaultValue={name}
-            onChange={handleChange}
+            // will fire the event once the user has changed focus from the input field
+            onBlur={handleChange}
             name="name"
           />
         </div>
@@ -47,7 +64,8 @@ function ContactForm() {
             type="email"
             defaultValue={email}
             name="email"
-            onChange={handleChange}
+            // will fire the event once the user has changed focus from the input field
+            onBlur={handleChange}
           />
         </div>
         <div>
@@ -55,10 +73,17 @@ function ContactForm() {
           <textarea
             name="message"
             defaultValue={message}
-            onChange={handleChange}
+            // will fire the event once the user has changed focus from the input field
+            onBlur={handleChange}
             rows="5"
           />
         </div>
+        {/* ensures an email address or message are entered */}
+        {errorMessage && (
+          <div>
+            <p className="error-text">{errorMessage}</p>
+          </div>
+        )}
         <button type="submit">Submit</button>
       </form>
     </section>
