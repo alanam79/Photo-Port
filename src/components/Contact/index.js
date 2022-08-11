@@ -43,7 +43,7 @@ function ContactForm() {
   // JSX
   return (
     <section>
-      <h1>Contact me</h1>
+      <h1 data-testid="h1tag">Contact me</h1>
       {/* create a form with three inputs */}
       <form id="contact-form" onSubmit={handleSubmit}>
         {/* // name input // email input // message text area */}
@@ -84,7 +84,9 @@ function ContactForm() {
             <p className="error-text">{errorMessage}</p>
           </div>
         )}
-        <button type="submit">Submit</button>
+        <button data-testid="button" type="submit">
+          Submit
+        </button>
       </form>
     </section>
   );
