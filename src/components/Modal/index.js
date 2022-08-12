@@ -1,7 +1,7 @@
 import React from "react";
 
 // destructuring props into current photo
-function Modal({ currentPhoto }) {
+function Modal({ onClose, currentPhoto }) {
   // destructure currentPhoto properties into constants to assign their values into the modal
   const { name, category, description, index } = currentPhoto;
 
@@ -14,7 +14,10 @@ function Modal({ currentPhoto }) {
           alt="current category"
         />
         <p>{description}</p>
-        <button type="button">Close this modal</button>
+        {/* added onclose function to click event listener/button */}
+        <button onClick={onClose} type="button">
+          Close this modal
+        </button>
       </div>
     </div>
   );

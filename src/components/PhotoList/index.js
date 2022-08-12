@@ -127,7 +127,8 @@ const PhotoList = ({ category }) => {
   const toggleModal = (image, i) => {
     // current photo
     setCurrentPhoto({ ...image, index: i });
-    setIsModalOpen(true);
+    // when the toggleModal function is executed, the value of isModalOpen is toggled from true to false
+    setIsModalOpen(!isModalOpen);
   };
 
   // the useState Hook in the PhotoList component to manage the current
@@ -140,7 +141,10 @@ const PhotoList = ({ category }) => {
 
   return (
     <div>
-      {isModalOpen && <Modal currentPhoto={currentPhoto} />}
+      {/* pass this function down as a prop to Modal, allowing us to toggle the state of the modal, */}
+      {isModalOpen && (
+        <Modal currentPhoto={currentPhoto} onClose={toggleModal} />
+      )}
       <div className="flex-row">
         {currentPhotos.map((image, i) => (
           <img
