@@ -6,11 +6,14 @@ import Nav from "..";
 const categories = [
   { name: "portraits", description: "Portraits of people in my life" },
 ];
+
+// mock a function that will replace the below 4 categories
 const mockCurrentCategory = jest.fn();
 const mockSetCurrentCategory = jest.fn();
 const mockContactSelected = jest.fn();
 const mockSetContactSelected = jest.fn();
 
+// clean up after each test
 afterEach(cleanup);
 
 it("renders", () => {
